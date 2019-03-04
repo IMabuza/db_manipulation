@@ -13,11 +13,14 @@ mycursor = mydb.cursor()
 
 createStr = ["CREATE TABLE IF NOT EXISTS customers(customerID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, firstName VARCHAR(30) NOT NULL, lastName VARCHAR(30) NOT NULL, gender ENUM('Male', 'Female') NOT NULL, address VARCHAR(60) NOT NULL, phone INT(15) NOT NULL, email VARCHAR(30) NOT NULL, city VARCHAR(60) NOT NULL, country VARCHAR(60) NOT NULL);",
 "CREATE TABLE IF NOT EXISTS employees(EmployeeID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,firstName VARCHAR(30) NOT NULL, lastName VARCHAR(30) NOT NULL, email VARCHAR(60) NOT NULL, jobTitle VARCHAR(30) NOT NULL);",
-"CREATE TABLE IF NOT EXISTS orders ( ordersID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, customerID INT NOT NULL,orderDate DATETIME, requiredDate DATETIME,shippedDate DATETIME,status VARCHAR(60));"]
+"CREATE TABLE IF NOT EXISTS orders ( ordersID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,orderDate DATETIME, requiredDate DATETIME,shippedDate DATETIME,status VARCHAR(60));",
+"CREATE TABLE IF NOT EXISTS payments(customerId INT NOT NULL,paymentDate DATETIME,amount DECIMAL, FOREIGN KEY (customerID) REFERENCES customers(customerID));"
+]
 
 sqlStr = ["INSERT INTO customers (firstName, lastName, gender, address, phone, email, city, country) VALUES (%s, %s, %s,%s, %s,%s, %s, %s)",
 "INSERT INTO employees (firstName, lastName, email, jobTitle) VALUES (%s, %s, %s,%s)",
-"INSERT INTO orders (customerID, orderDate, requiredDate, shippedDate, status) VALUES (%s, %s, %s,%s,%s)"]
+"INSERT INTO orders (orderDate, requiredDate, shippedDate, status) VALUES (%s, %s, %s,%s)",
+"INSERT INTO payments (customerID, paymentDate, amount) VALUES (%s, %s, %s)"]
 
 val = [[("John","Hibert","Male","284 chaucer st",84789657,
 "john@gmail.com","Johannesburg","South Africa"),
@@ -34,9 +37,11 @@ val = [[("John","Hibert","Male","284 chaucer st",84789657,
 ("Lesly","Cronje","LesC@gmail.com","Clerk"),
 ("Gideon", "Maduku","Gm@gmail.com","Accountant")],
 
-[(1,'2018-01-09','2018-05-09','2018-02-09',"Not Shipped"),
-(3,'2018-01-09','2018-04-09','2018-03-09','Shipped'),
-(4,'2018-01-09','2018-03-09','2018-02-09','Not shipped')]
+[('2018-01-09','2018-05-09','2018-02-09',"Not Shipped"),
+('2018-01-09','2018-04-09','2018-03-09','Shipped'),
+('2018-01-09','2018-03-09','2018-02-09','Not shipped')],
+
+[(1, '2018-01-09',100.00),(2,'2018-01-09',250.75)]
 
 
 ]
