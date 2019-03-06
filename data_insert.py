@@ -183,6 +183,26 @@ print("Count the number of shipped orders in the Orders table.")
 
 iter_results()
 
+#Return the average price of all Products, in Rands and in Dollars (assume the exchange rate is R12 to the Dollar).
+
+mycursor.execute("SELECT COUNT(status) FROM orders WHERE status = 'shipped';")
+
+print("Count the number of shipped orders in the Orders table.")
+
+iter_results()
+
+#Return the average price of all Products, in Rands and in Dollars (assume the exchange rate is R12 to the Dollar).
+
+mycursor.execute("SELECT AVG(buyPrice) FROM products;")
+
+print("Return the average price of all Products, in Rands and in Dollars (assume the exchange rate is R12 to the Dollar).")
+
+iter_results()
+
+
+
+
+
 
 
 
